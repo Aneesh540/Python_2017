@@ -12,6 +12,7 @@ def check_fibonacci(n):
 
     while(n>0):
         a,b=b,a+b
+
         if b is n:
             return True
 
@@ -26,8 +27,7 @@ def generate_fibonacci(n):
     """ generate a nth fibonacci number"""
 
     if n<0:
-        print("NOT POSSIBLE")
-        return None
+        return "NOT POSSIBLE"
 
     elif 0<n<3:
         return 1
@@ -35,22 +35,34 @@ def generate_fibonacci(n):
     else:
         a,b=1,1
 
-        for j in range(n):
+        for j in range(n-2):
             a,b = b, a+b
-            return b
+
+        return b
+
+
+def yield_fibonacci(n):
+    """ yield upto nth fibonacci number"""
+    a, b = 1, 1
+
+    for _ in range(n):
+        yield a
+        a,b = b,a+b
 
 
 
+if __name__ == "__main__":
 
-print(generate_fibonacci(5))
+    foo = generator_func(11)
 
-print(check_fibonacci(3))
-print(check_fibonacci(8))
-print(check_fibonacci(7))
+    print(foo)
+    print(*foo,sep="\t")
 
+    r = int(input("no.upto which u want to generate fibonacci number:"))
+    print(*yield_fibonacci(r),sep='\t')
 
+    print(generate_fibonacci(100))
 
-foo = generator_func(11)
-
-print(foo)
-print(*foo,sep=" ")
+    print(check_fibonacci(99))
+    print(check_fibonacci(8))
+    print(check_fibonacci(7))
